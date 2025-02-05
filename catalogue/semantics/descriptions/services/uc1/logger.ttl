@@ -9,7 +9,7 @@ PREFIX gx:     <https://w3id.org/gaia-x/development#>
 PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
 PREFIX ac3:    <https://ac3-project.eu/#>
 
-<>
+<https://piveau.ac3-project.eu/set/resource/service/d8a6b514-3b80-48ec-90cd-d4a229736fb3>
     rdf:type                gx:ServiceOffering ;
     dct:title               "Streaming IoT Logger" ;
     schema:name             "streaming-logger" ;

@@ -9,7 +9,7 @@ PREFIX gx:     <https://w3id.org/gaia-x/development#>
 PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
 PREFIX ac3:    <https://ac3-project.eu/#>
 
-<>
+<https://piveau.ac3-project.eu/set/resource/service/10333e33-0875-4869-9f15-7fc7fccd1d48>
     rdf:type                gx:ServiceOffering ;
     dct:title               "Streaming IoT Connector" ;
     schema:name             "streaming-connector" ;
