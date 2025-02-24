@@ -197,7 +197,7 @@ gx:DatasetShape
                               shacl:order         8 ;
                               shacl:path          ac3:requiredConnector ;
                               piveau:mappingClass "StandardText" ;
-                              piveau:mappingName  "requiresConnector" ] ;
+                              piveau:mappingName  "requiredConnector" ] ;
     shacl:property          [ shacl:datatype      xsd:string ;
                               shacl:description   "A service offering needed for using the dataset." ;
                               shacl:minCount      0 ;
@@ -206,5 +206,5 @@ gx:DatasetShape
                               shacl:order         9 ;
                               shacl:path          ac3:requiredServiceOffering ;
                               piveau:mappingClass "StandardText" ;
-                              piveau:mappingName  "requiresServiceOffering" ] ;
+                              piveau:mappingName  "requiredServiceOffering" ] ;
     shacl:targetClass       gx:Dataset .
