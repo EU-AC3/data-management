@@ -3,6 +3,7 @@ PREFIX dct:    <http://purl.org/dc/terms/>
 PREFIX gx:     <https://w3id.org/gaia-x/development#>
 PREFIX rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX schema: <https://schema.org/>
+PREFIX ac3:    <https://ac3-project.eu/ontology#>
 
 <https://piveau.ac3-project.eu/set/resource/dataset/2befff01-885e-4e5d-a216-e2354baae959>
     rdf:type                 gx:Dataset ;
@@ -12,4 +13,11 @@ PREFIX schema: <https://schema.org/>
     gx:license               "BSD-3-Clause" ;
     dcat:assetId             "uc1-stream" ;
     dcat:endpointDescription "dspaceconnector" ;
-    dcat:endpointURL         "http://ionos-s1.sparkworks.net:18182/protocol" .
+    dcat:endpointURL         "http://ionos-s1.sparkworks.net:18182/protocol" ;
+    ac3:requiresConnector    <https://piveau.ac3-project.eu/set/resource/service/10333e33-0875-4869-9f15-7fc7fccd1d48> ;
+    ac3:requiresServiceOffering
+                             <https://piveau.ac3-project.eu/set/resource/service/d8a6b514-3b80-48ec-90cd-d4a229736fb3> ;
+    ac3:requiresServiceOffering
+                             <https://piveau.ac3-project.eu/set/resource/service/115f7472-194d-446c-9518-efb9f55d3f73> ;
+    ac3:requiresServiceOffering
+                             <https://piveau.ac3-project.eu/set/resource/service/5b6372e6-11a0-47dc-8b1c-761ff81cba25> .

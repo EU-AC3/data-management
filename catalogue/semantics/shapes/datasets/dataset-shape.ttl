@@ -7,6 +7,7 @@ PREFIX dcat:   <http://www.w3.org/ns/dcat#>
 PREFIX schema: <https://schema.org/>
 PREFIX gx:     <https://w3id.org/gaia-x/development#>
 PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+PREFIX ac3:    <https://ac3-project.eu/terms#>
 
 gx:DatasetShape
     rdf:type                shacl:NodeShape ;
@@ -26,7 +27,7 @@ gx:DatasetShape
                               shacl:description   "A human readable name of the entity." ;
                               shacl:maxCount      2 ;
                               shacl:name          "Name" ;
-                              shacl:order         4 ;
+                              shacl:order         2 ;
                               shacl:path          schema:name ;
                               piveau:mappingClass "StandardText" ;
                               piveau:mappingName  "name" ] ;
@@ -164,44 +165,46 @@ gx:DatasetShape
                               shacl:path          gx:license ;
                               piveau:mappingClass "StandardKeyword" ;
                               piveau:mappingName  "license" ] ;
-    shacl:property          [ shacl:description
-                                                  "A resolvable link to the service offering self-description related to the service and that can exist independently of it."@en ;
-                              shacl:minCount      1 ;
-                              shacl:name          "Terms & Conditions"@en ;
-                              shacl:node          gx:DistributionShape ;
-                              shacl:order         5 ;
-                              shacl:path          gx:Distribution ;
-                              piveau:mappingClass "Nested" ;
-                              piveau:mappingLink  gx:DistributionShape ;
-                              piveau:mappingName  "distributions" ] ;
-    shacl:targetClass       gx:Dataset .
-
-
-gx:DistributionShape
-    rdf:type                shacl:NodeShape ;
-    shacl:ignoredProperties ( rdf:type ) ;
-    shacl:property          [ shacl:datatype      xsd:string ;
-                              shacl:description   "A free text description of the entity." ;
-                              shacl:maxCount      1 ;
-                              shacl:name          "Endpoint Description" ;
-                              shacl:order         1 ;
-                              shacl:path          dcat:endpointDescription ;
-                              piveau:mappingClass "StandardText" ;
-                              piveau:mappingName  "endpointDescription" ] ;
     shacl:property          [ shacl:datatype      xsd:string ;
                               shacl:description   "The asset ID." ;
                               shacl:maxCount      1 ;
                               shacl:name          "Asset ID" ;
-                              shacl:order         2 ;
+                              shacl:order         5 ;
                               shacl:path          dcat:assetName ;
                               piveau:mappingClass "StandardText" ;
                               piveau:mappingName  "assetId" ] ;
     shacl:property          [ shacl:datatype      xsd:string ;
+                              shacl:description   "A free text description of the entity." ;
+                              shacl:maxCount      1 ;
+                              shacl:name          "Endpoint Description" ;
+                              shacl:order         6 ;
+                              shacl:path          dcat:endpointDescription ;
+                              piveau:mappingClass "StandardText" ;
+                              piveau:mappingName  "endpointDescription" ] ;
+    shacl:property          [ shacl:datatype      xsd:string ;
                               shacl:description   "The distribution endpointURL." ;
                               shacl:maxCount      1 ;
                               shacl:name          "Endpoint URL" ;
-                              shacl:order         3 ;
+                              shacl:order         7 ;
                               shacl:path          dcat:endpointURL ;
                               piveau:mappingClass "StandardText" ;
                               piveau:mappingName  "endpointURL" ] ;
-    shacl:targetClass       dcat:Distribution .
+    shacl:property          [ shacl:datatype      xsd:string ;
+                              shacl:description   "The edc connector service offering needed for using the dataset." ;
+                              shacl:minCount      1 ;
+                              shacl:name          "Required Connector" ;
+                              shacl:node          gx:ServiceOfferingShape ;
+                              shacl:order         8 ;
+                              shacl:path          ac3:requiredConnector ;
+                              piveau:mappingClass "StandardText" ;
+                              piveau:mappingName  "requiresConnector" ] ;
+    shacl:property          [ shacl:datatype      xsd:string ;
+                              shacl:description   "A service offering needed for using the dataset." ;
+                              shacl:minCount      0 ;
+                              shacl:name          "Required Service Offering" ;
+                              shacl:node          gx:ServiceOfferingShape ;
+                              shacl:order         9 ;
+                              shacl:path          ac3:requiredServiceOffering ;
+                              piveau:mappingClass "StandardText" ;
+                              piveau:mappingName  "requiresServiceOffering" ] ;
+    shacl:targetClass       gx:Dataset .
