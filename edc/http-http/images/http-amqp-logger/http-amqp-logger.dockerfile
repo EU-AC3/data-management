@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 ENV HTTP_SERVER_PORT=4000
 
 # Copy the current directory contents into the container at /usr/src/app
-COPY http-amqp-message-bridge.jar .
+COPY target/http-amqp-message-bridge-1.0-SNAPSHOT.one-jar.jar .
 
 # Specify the command to run the application
-CMD java -jar http-amqp-message-bridge.jar
+CMD java -jar http-amqp-message-bridge-1.0-SNAPSHOT.one-jar.jar
