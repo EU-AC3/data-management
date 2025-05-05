@@ -14,4 +14,8 @@ public class EnvMessage {
     @JsonProperty("iaq_accuracy")
     Double iaqAccuracy;
     Double co2;
+    Double bat;
+    Double motion;
+    Double lux;
+    Double vibration;
 }

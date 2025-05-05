@@ -109,16 +109,30 @@ public class RabbitService {
 
     private void extractAndSendReadings(final long took, final String baseUri, final EnvMessage envMessage) {
         sendMeasurement(baseUri + "/temperature", envMessage.getTemperature(), envMessage.getTimestamp());
+        //sensirion
         sendMeasurement(baseUri + "/humidity", envMessage.getHumidity(), envMessage.getTimestamp());
         sendMeasurement(baseUri + "/iaq", envMessage.getIaq(), envMessage.getTimestamp());
         sendMeasurement(baseUri + "/iaqAccuracy", envMessage.getIaqAccuracy(), envMessage.getTimestamp());
         sendMeasurement(baseUri + "/co2", envMessage.getCo2(), envMessage.getTimestamp());
+        //shelly
+        sendMeasurement(baseUri + "/bat", envMessage.getBat(), envMessage.getTimestamp());
+        sendMeasurement(baseUri + "/motion", envMessage.getMotion(), envMessage.getTimestamp());
+        sendMeasurement(baseUri + "/lux", envMessage.getLux(), envMessage.getTimestamp());
+        sendMeasurement(baseUri + "/vibration", envMessage.getVibration(), envMessage.getTimestamp());
+        
         String device = baseUri.split("/")[2];
+        
         Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "temperature").record(took, TimeUnit.MILLISECONDS);
+        //sensirion
         Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "humidity").record(took, TimeUnit.MILLISECONDS);
         Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "iaq").record(took, TimeUnit.MILLISECONDS);
         Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "iaqAccuracy").record(took, TimeUnit.MILLISECONDS);
         Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "co2").record(took, TimeUnit.MILLISECONDS);
+        //shelly
+        Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "bat").record(took, TimeUnit.MILLISECONDS);
+        Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "motion").record(took, TimeUnit.MILLISECONDS);
+        Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "lux").record(took, TimeUnit.MILLISECONDS);
+        Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "vibration").record(took, TimeUnit.MILLISECONDS);
 
         outputCounter.increment(5);
     }
