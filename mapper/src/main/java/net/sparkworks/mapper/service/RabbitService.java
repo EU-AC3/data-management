@@ -96,11 +96,11 @@ public class RabbitService {
         log.info("[{}] routingKey:{} body:{}", QUEUE_INPUT, message.getMessageProperties().getReceivedRoutingKey(), new String(message.getBody()));
         try {
             inputCounter.increment();
-            long start = System.currentTimeMillis();
+            long start = System.nanoTime();
             final EnvMessage envMessage = mapper.readValue(new String(message.getBody()), EnvMessage.class);
             log.info("[{}] parsedMessage: {}", QUEUE_INPUT, envMessage);
             final String baseUri = message.getMessageProperties().getReceivedRoutingKey();
-            long took = System.currentTimeMillis() - start;
+            long took = System.nanoTime() - start;
             extractAndSendReadings(took, baseUri, envMessage);
         } catch (JsonProcessingException e) {
             log.error(e.getMessage(), e);
@@ -122,17 +122,17 @@ public class RabbitService {
         
         String device = baseUri.split("/")[2];
         
-        Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "temperature").record(took, TimeUnit.MILLISECONDS);
+        Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "temperature").record(took, TimeUnit.NANOSECONDS);
         //sensirion
-        Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "humidity").record(took, TimeUnit.MILLISECONDS);
-        Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "iaq").record(took, TimeUnit.MILLISECONDS);
-        Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "iaqAccuracy").record(took, TimeUnit.MILLISECONDS);
-        Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "co2").record(took, TimeUnit.MILLISECONDS);
+        Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "humidity").record(took, TimeUnit.NANOSECONDS);
+        Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "iaq").record(took, TimeUnit.NANOSECONDS);
+        Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "iaqAccuracy").record(took, TimeUnit.NANOSECONDS);
+        Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "co2").record(took, TimeUnit.NANOSECONDS);
         //shelly
-        Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "bat").record(took, TimeUnit.MILLISECONDS);
-        Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "motion").record(took, TimeUnit.MILLISECONDS);
-        Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "lux").record(took, TimeUnit.MILLISECONDS);
-        Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "vibration").record(took, TimeUnit.MILLISECONDS);
+        Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "bat").record(took, TimeUnit.NANOSECONDS);
+        Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "motion").record(took, TimeUnit.NANOSECONDS);
+        Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "lux").record(took, TimeUnit.NANOSECONDS);
+        Metrics.timer(PROCESSING_TIMER_NAME, TAG_DEVICE, device, TAG_SENSOR, "vibration").record(took, TimeUnit.NANOSECONDS);
 
         outputCounter.increment(5);
     }
