@@ -15,7 +15,7 @@ ac3:ServiceShape
                               piveau:mappingClass "StandardText" ;
                               piveau:mappingName  "id" ] ;
     shacl:property          [ shacl:datatype      xsd:string ;
-                              shacl:description   "A human readable title of the entity." ;
+                              shacl:description   "Human readable title"@en ;
                               shacl:maxCount      1 ;
                               shacl:name          "Title" ;
                               shacl:order         1 ;
@@ -23,7 +23,7 @@ ac3:ServiceShape
                               piveau:mappingClass "StandardText" ;
                               piveau:mappingName  "title" ] ;
     shacl:property          [ shacl:datatype      xsd:string ;
-                              shacl:description   "A human readable name of the entity."@en ;
+                              shacl:description   "Human readable name"@en ;
                               shacl:maxCount      1 ;
                               shacl:minCount      1 ;
                               shacl:name          "Name"@en ;
@@ -32,7 +32,7 @@ ac3:ServiceShape
                               piveau:mappingClass "StandardText" ;
                               piveau:mappingName  "name" ] ;
     shacl:property          [ shacl:datatype      xsd:string ;
-                              shacl:description   "A free text description of the entity."@en ;
+                              shacl:description   "Free text description"@en ;
                               shacl:maxCount      1 ;
                               shacl:name          "Description"@en ;
                               shacl:order         3 ;
@@ -44,14 +44,6 @@ ac3:ServiceShape
                               shacl:maxCount      1 ;
                               shacl:name          "Image"@en ;
                               shacl:order         4 ;
-                              shacl:path          ac3:image ;
-                              piveau:mappingClass "StandardText" ;
-                              piveau:mappingName  "image" ] ;
-    shacl:property          [ shacl:datatype      xsd:string ;
-                              shacl:description   "The service's image."@en ;
-                              shacl:maxCount      1 ;
-                              shacl:name          "Image"@en ;
-                              shacl:order         5 ;
                               shacl:path          ac3:image ;
                               piveau:mappingClass "StandardText" ;
                               piveau:mappingName  "image" ] ;
@@ -68,10 +60,35 @@ ac3:ServiceShape
                               shacl:pattern     "^[0-9]+:[0-9]+$" ;
                               shacl:path        ac3:ExposedPort ] ;
     shacl:property          [ shacl:datatype    xsd:string ;
-                              shacl:description "The service's exposed ports."@en ;
+                              shacl:description "The service's volumes."@en ;
                               shacl:minCount    0 ;
                               shacl:order       8 ;
                               shacl:path        ac3:volumes ] ;
+    shacl:property          [ shacl:description "The service's resource requirements."@en ;
+                              shacl:minCount    0 ;
+                              shacl:maxCount    1 ;
+                              shacl:order       8 ;
+                              shacl:path        gx:ContainerResourceLimits ] ; # https://docs.gaia-x.eu/ontology/development/classes/ContainerResourceLimits/
+    shacl:property          [ shacl:description "The service's SLAs."@en ;
+                              shacl:minCount    0 ;
+                              shacl:maxCount    1 ;
+                              shacl:order       8 ;
+                              shacl:path        ac3:microservicesSLA ] ;
     shacl:targetClass       gx:ServiceOffering .
 
 
+# Define constraints for Microservices SLA
+ac3:MicroservicesSLAShape
+    a                 shacl:NodeShape ;
+    shacl:targetClass gx:MicroservicesSLA ;
+    shacl:property    [ shacl:path         ac3:serviceAvailability ;
+                        shacl:datatype     schema:Number ;
+                        shacl:minInclusive 0 ;
+                        shacl:maxInclusive 100 ;
+                        shacl:message      "Service Availability must be between 0 and 100%." ] ;
+    shacl:property    [ shacl:path    ac3:maxResponseTime ;
+                        shacl:in      ( "Low" "Medium" "High" ) ;
+                        shacl:message "Max Response Time should be 'Low', 'Medium', or 'High'." ] ;
+    shacl:property    [ shacl:path    ac3:dataThroughput ;
+                        shacl:in      ( "Low" "Medium" "High" ) ;
+                        shacl:message "Data Throughput should be 'Low', 'Medium', or 'High'." ] .

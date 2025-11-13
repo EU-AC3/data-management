@@ -7,6 +7,8 @@ PREFIX dcat:   <http://www.w3.org/ns/dcat#>
 PREFIX schema: <https://schema.org/>
 PREFIX gx:     <https://w3id.org/gaia-x/development#>
 PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+PREFIX geo:    <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX vcard:  <http://www.w3.org/2006/vcard/ns#>
 PREFIX ac3:    <https://ac3-project.eu/#>
 
 gx:DatasetShape
@@ -16,7 +18,7 @@ gx:DatasetShape
                               piveau:mappingClass "StandardText" ;
                               piveau:mappingName  "id" ] ;
     shacl:property          [ shacl:datatype      xsd:string ;
-                              shacl:description   "A human readable title of the entity." ;
+                              shacl:description   "Human readable title"@en ;
                               shacl:maxCount      1 ;
                               shacl:name          "Title" ;
                               shacl:order         1 ;
@@ -24,7 +26,7 @@ gx:DatasetShape
                               piveau:mappingClass "StandardText" ;
                               piveau:mappingName  "title" ] ;
     shacl:property          [ shacl:datatype      xsd:string ;
-                              shacl:description   "A human readable name of the entity." ;
+                              shacl:description   "Human readable name"@en ;
                               shacl:maxCount      2 ;
                               shacl:name          "Name" ;
                               shacl:order         2 ;
@@ -32,7 +34,7 @@ gx:DatasetShape
                               piveau:mappingClass "StandardText" ;
                               piveau:mappingName  "name" ] ;
     shacl:property          [ shacl:datatype      xsd:string ;
-                              shacl:description   "A free text description of the entity." ;
+                              shacl:description   "Free text description"@en ;
                               shacl:maxCount      1 ;
                               shacl:name          "Description" ;
                               shacl:order         3 ;
@@ -40,7 +42,7 @@ gx:DatasetShape
                               piveau:mappingClass "StandardText" ;
                               piveau:mappingName  "description" ] ;
     shacl:property          [ shacl:datatype      xsd:string ;
-                              shacl:description   "A list of SPDX identifiers or URL to document." ;
+                              shacl:description   "SPDX identifiers or URL"@en ;
                               shacl:in            ( "0BSD" "AAL" "Abstyles" "AdaCore-doc" "Adobe-2006" "Adobe-Glyph"
                                                     "ADSL" "AFL-1.1" "AFL-1.2" "AFL-2.0" "AFL-2.1" "AFL-3.0" "Afmparse"
                                                     "AGPL-1.0-only" "AGPL-1.0-or-later" "AGPL-3.0-only"
@@ -166,6 +168,27 @@ gx:DatasetShape
                               piveau:mappingClass "StandardKeyword" ;
                               piveau:mappingName  "license" ] ;
     shacl:property          [ shacl:datatype      xsd:string ;
+                              shacl:description   "Contact Point"@en ;
+                              shacl:minCount      1 ;
+                              shacl:name          "Contact Point" ;
+                              shacl:node          ac3:ContactPointShape ;
+                              shacl:order         8 ;
+                              shacl:path          dcat:contactPoint ;
+                              piveau:mappingClass "StandardText" ;
+                              piveau:mappingName  "contactPoint" ] ;
+    shacl:property          [ shacl:datatype      xsd:double ;
+                              shacl:minCount      1 ;
+                              shacl:maxCount      1 ;
+                              shacl:path          geo:lat ;
+                              piveau:mappingClass "StandardText" ;
+                              piveau:mappingName  "lat" ] ;
+    shacl:property          [ shacl:datatype      xsd:double ;
+                              shacl:minCount      1 ;
+                              shacl:maxCount      1 ;
+                              shacl:path          geo:long ;
+                              piveau:mappingClass "StandardText" ;
+                              piveau:mappingName  "lon" ] ;
+    shacl:property          [ shacl:datatype      xsd:string ;
                               shacl:description   "The asset ID." ;
                               shacl:maxCount      1 ;
                               shacl:name          "Asset ID" ;
@@ -174,7 +197,7 @@ gx:DatasetShape
                               piveau:mappingClass "StandardText" ;
                               piveau:mappingName  "assetId" ] ;
     shacl:property          [ shacl:datatype      xsd:string ;
-                              shacl:description   "A free text description of the entity." ;
+                              shacl:description   "Free text description"@en ;
                               shacl:maxCount      1 ;
                               shacl:name          "Endpoint Description" ;
                               shacl:order         6 ;
@@ -182,7 +205,7 @@ gx:DatasetShape
                               piveau:mappingClass "StandardText" ;
                               piveau:mappingName  "endpointDescription" ] ;
     shacl:property          [ shacl:datatype      xsd:string ;
-                              shacl:description   "The distribution endpointURL." ;
+                              shacl:description   "Distribution endpointURL"@en ;
                               shacl:maxCount      1 ;
                               shacl:name          "Endpoint URL" ;
                               shacl:order         7 ;
@@ -190,7 +213,7 @@ gx:DatasetShape
                               piveau:mappingClass "StandardText" ;
                               piveau:mappingName  "endpointURL" ] ;
     shacl:property          [ shacl:datatype      xsd:string ;
-                              shacl:description   "The edc connector service offering needed for using the dataset." ;
+                              shacl:description   "EDC connector service offering"@en ;
                               shacl:minCount      1 ;
                               shacl:name          "Required Connector" ;
                               shacl:node          gx:ServiceOfferingShape ;
@@ -199,7 +222,7 @@ gx:DatasetShape
                               piveau:mappingClass "StandardText" ;
                               piveau:mappingName  "requiredConnector" ] ;
     shacl:property          [ shacl:datatype      xsd:string ;
-                              shacl:description   "A service offering needed for using the dataset." ;
+                              shacl:description   "Service offering needed"@en ;
                               shacl:minCount      0 ;
                               shacl:name          "Required Service Offering" ;
                               shacl:node          gx:ServiceOfferingShape ;
@@ -208,3 +231,21 @@ gx:DatasetShape
                               piveau:mappingClass "StandardText" ;
                               piveau:mappingName  "requiredServiceOffering" ] ;
     shacl:targetClass       gx:Dataset .
+
+ac3:ContactPointShape
+    rdf:type       shacl:NodeShape ;
+    shacl:property [ shacl:path     rdf:type ;
+                     shacl:hasValue vcard:Kind ;  # Ensures it is of type vcard:Kind
+                   ] ;
+    shacl:property [ shacl:path     vcard:hasEmail ;
+                     shacl:datatype xsd:anyURI ;  # Email must be a valid URI
+                     shacl:minCount 1 ;
+                     shacl:maxCount 1 ; ] ;
+    shacl:property [ shacl:path     vcard:hasName ;
+                     shacl:datatype xsd:string ;  # Name must be a string
+                     shacl:minCount 1 ;
+                     shacl:maxCount 1 ; ] ;
+    shacl:property [ shacl:path     vcard:fn ;
+                     shacl:datatype xsd:string ;  # Full name or organization name
+                     shacl:minCount 1 ;
+                     shacl:maxCount 1 ; ] .
