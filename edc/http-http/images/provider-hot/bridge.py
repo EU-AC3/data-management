@@ -1,12 +1,12 @@
-import datetime
+import json
 import os
 
 import paho.mqtt.client as mqtt
 
 # Configuration
-MQTT_BROKER = os.getenv("MQTT_BROKER")  # Change this to your MQTT broker
-MQTT_PORT = int(os.getenv("MQTT_PORT"))  # Default MQTT port
-MQTT_TOPIC = os.getenv("MQTT_TOPIC")  # Change this to your desired topic
+MQTT_BROKER = os.getenv("MQTT_BROKER")
+MQTT_PORT = int(os.getenv("MQTT_PORT"))
+MQTT_TOPIC = os.getenv("MQTT_TOPIC")
 OUTPUT_DIR = os.getenv("OUTPUT_DIR", "./data")  # Directory to save messages
 
 # Ensure output directory exists
@@ -22,8 +22,8 @@ def on_connect(client, userdata, flags, rc):
 
 
 def on_message(client, userdata, msg):
-    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    file_path = os.path.join(OUTPUT_DIR, f"{timestamp}.txt")
+    dev_name = json.loads(msg.payload.decode("utf-8"))["topic"].split("/")[-1]
+    file_path = os.path.join(OUTPUT_DIR, dev_name)
 
     with open(file_path, "w") as file:
         file.write(msg.payload.decode("utf-8"))
