@@ -4,45 +4,71 @@
   "policies": [],
   "users": [
     {
-      "name": "user",
-      "password_hash": "sFsmXHTzRAG+2pVSMhQuduoj29bgH0hBw+2BQwQUYxnTa/c+",
+      "name": "uc1",
+      "password_hash": "nzNdRUTlq6wVU/bOZNKBOrjLAsjLD1iTGpcUWYt+WxIaxDc6",
       "hashing_algorithm": "rabbit_password_hashing_sha256",
       "tags": "administrator"
     },
     {
-      "name": "forwarder3",
-      "password_hash": "ugDu6ptMTpaMvrIULHyCZzk5jNOwH/pK0ccVdbpyV5FRBFsB",
+      "name": "connector",
+      "password_hash": "sEjNg8/8ydAJIgEExXgGckZeyZt8eH9PdXm2tHjwSw2JSVNQ",
       "hashing_algorithm": "rabbit_password_hashing_sha256",
       "tags": "management"
     },
     {
-      "name": "forwarder1",
-      "password_hash": "4iimDVqsD+Vk6uALTmzPx/LJa8fbPSun57SZz6n5cKdyNyhf",
+      "name": "mapper",
+      "password_hash": "XqttQuS4ykY4RBZ7kIFp+3giZDzhFxJilojmL2zqFkLu0d/D",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": "management"
+    },
+    {
+      "name": "ml1",
+      "password_hash": "Mbsp6nP+LOfF/cue31xo5HRVfQJ4F4b5MrxGTpVVfw6m7m2N",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": "management"
+    },
+    {
+      "name": "ml2",
+      "password_hash": "/+V/nmR2P2DA+jYHWBJ41Km4YS5VQwqlXYNmiDUdcgs952FT",
       "hashing_algorithm": "rabbit_password_hashing_sha256",
       "tags": "management"
     }
   ],
   "permissions": [
     {
-      "user": "user",
+      "user": "uc1",
       "vhost": "/",
       "configure": ".*",
       "write": ".*",
       "read": ".*"
     },
     {
-      "user": "forwarder3",
+      "user": "connector",
       "vhost": "/",
       "configure": ".*",
       "write": ".*",
       "read": ".*"
     },
     {
-      "user": "forwarder1",
+      "user": "mapper",
       "vhost": "/",
-      "configure": "forwarder1",
-      "write": "forwarder1",
-      "read": "forwarder1"
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    },
+    {
+      "user": "ml1",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    },
+    {
+      "user": "ml2",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
     }
   ],
   "vhosts": [
@@ -51,15 +77,6 @@
     }
   ],
   "exchanges": [
-    {
-      "name": "forwarder1",
-      "vhost": "/",
-      "type": "topic",
-      "durable": true,
-      "auto_delete": false,
-      "internal": false,
-      "arguments": {}
-    },
     {
       "name": "data",
       "vhost": "/",
@@ -88,25 +105,7 @@
       "arguments": {}
     },
     {
-      "name": "uc3-data",
-      "vhost": "/",
-      "type": "topic",
-      "durable": true,
-      "auto_delete": false,
-      "internal": false,
-      "arguments": {}
-    },
-    {
-      "name": "uc3-data-result",
-      "vhost": "/",
-      "type": "topic",
-      "durable": true,
-      "auto_delete": false,
-      "internal": false,
-      "arguments": {}
-    },
-    {
-      "name": "video-exchange",
+      "name": "commands",
       "vhost": "/",
       "type": "topic",
       "durable": true,
@@ -131,6 +130,20 @@
       "arguments": {}
     },
     {
+      "name": "data-mapped-ml1",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "data-mapped-ml2",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
       "name": "data-processed",
       "vhost": "/",
       "durable": true,
@@ -138,47 +151,7 @@
       "arguments": {}
     },
     {
-      "name": "uc1-data-ws",
-      "vhost": "/",
-      "durable": true,
-      "auto_delete": false,
-      "arguments": {
-        "x-message-ttl":5000
-      }
-    },
-    {
       "name": "commands",
-      "vhost": "/",
-      "durable": true,
-      "auto_delete": false,
-      "arguments": {
-      }
-    },
-    {
-      "name": "uc3-data",
-      "vhost": "/",
-      "durable": true,
-      "auto_delete": false,
-      "arguments": {}
-    },
-    {
-      "name": "uc3-data-ws",
-      "vhost": "/",
-      "durable": true,
-      "auto_delete": false,
-      "arguments": {
-        "x-message-ttl":5000
-      }
-    },
-    {
-      "name": "uc3-data-result",
-      "vhost": "/",
-      "durable": true,
-      "auto_delete": false,
-      "arguments": {}
-    },
-    {
-      "name": "video-queue",
       "vhost": "/",
       "durable": true,
       "auto_delete": false,
@@ -186,14 +159,6 @@
     }
   ],
   "bindings": [
-    {
-      "source": "forwarder1",
-      "vhost": "/",
-      "destination": "data",
-      "destination_type": "exchange",
-      "routing_key": "#",
-      "arguments": {}
-    },
     {
       "source": "data",
       "vhost": "/",
@@ -211,49 +176,25 @@
       "arguments": {}
     },
     {
+      "source": "data-mapped",
+      "vhost": "/",
+      "destination": "data-mapped-ml1",
+      "destination_type": "queue",
+      "routing_key": "#",
+      "arguments": {}
+    },
+    {
+      "source": "data-mapped",
+      "vhost": "/",
+      "destination": "data-mapped-ml2",
+      "destination_type": "queue",
+      "routing_key": "#",
+      "arguments": {}
+    },
+    {
       "source": "data-processed",
       "vhost": "/",
       "destination": "data-processed",
-      "destination_type": "queue",
-      "routing_key": "#",
-      "arguments": {}
-    },
-    {
-      "source": "forwarder1",
-      "vhost": "/",
-      "destination": "uc1-data-ws",
-      "destination_type": "queue",
-      "routing_key": "#",
-      "arguments": {}
-    },
-    {
-      "source": "uc3-data",
-      "vhost": "/",
-      "destination": "uc3-data",
-      "destination_type": "queue",
-      "routing_key": "#",
-      "arguments": {}
-    },
-    {
-      "source": "uc3-data",
-      "vhost": "/",
-      "destination": "uc3-data-ws",
-      "destination_type": "queue",
-      "routing_key": "#",
-      "arguments": {}
-    },
-    {
-      "source": "uc3-data-result",
-      "vhost": "/",
-      "destination": "uc3-data-result",
-      "destination_type": "queue",
-      "routing_key": "#",
-      "arguments": {}
-    },
-    {
-      "source": "video-exchange",
-      "vhost": "/",
-      "destination": "video-queue",
       "destination_type": "queue",
       "routing_key": "#",
       "arguments": {}
