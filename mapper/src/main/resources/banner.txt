@@ -1,8 +1,19 @@
- __  __
-|  \/  | __ _ _ __  _ __   ___ _ __
-| |\/| |/ _` | '_ \| '_ \ / _ \ '__|
-| |  | | (_| | |_) | |_) |  __/ |
-|_|  |_|\__,_| .__/| .__/ \___|_|
-                               |_|   |_|
-Spring Boot   : ${spring-boot.formatted-version}
-Active profile: ${spring.profiles.active}
+
+${AnsiColor.BRIGHT_CYAN}
+   ___   _________    ____        __           __  ___
+  /   | / ____/__ \  / __ \____ _/ /_____ _   /  |/  /___ _____  ____  ___  _____
+ / /| |/ /    __/ / / / / / __ `/ __/ __ `/  / /|_/ / __ `/ __ \/ __ \/ _ \/ ___/
+/ ___ / /___ / __/ / /_/ / /_/ / /_/ /_/ /  / /  / / /_/ / /_/ / /_/ /  __/ /
+/_/  |_\____//____//_____/\__,_/\__/\__,_/  /_/  /_/\__,_/ .___/ .___/\___/_/
+                                                        /_/   /_/
+${AnsiColor.BRIGHT_BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${AnsiColor.BRIGHT_WHITE}SparkWorks IoT Engine :: Data Mapper Service${AnsiColor.DEFAULT}
+${AnsiColor.BRIGHT_BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${AnsiColor.BRIGHT_GREEN}Spring Boot:${AnsiColor.DEFAULT}    ${spring-boot.formatted-version}
+${AnsiColor.BRIGHT_GREEN}Profile:${AnsiColor.DEFAULT}        ${spring.profiles.active:default}
+${AnsiColor.BRIGHT_GREEN}Java Version:${AnsiColor.DEFAULT}   ${java.version}
+${AnsiColor.BRIGHT_GREEN}App Version:${AnsiColor.DEFAULT}    ${application.formatted-version:1.0.0-SNAPSHOT}
+${AnsiColor.BRIGHT_BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${AnsiColor.BRIGHT_YELLOW}📡 Mapping sensor data from RabbitMQ to time-series format
+${AnsiColor.BRIGHT_BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+${AnsiColor.DEFAULT}

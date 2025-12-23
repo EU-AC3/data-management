@@ -42,3 +42,7 @@ rabbitmq:
 mapper:
   skinresponse:
     threshold: 5
+  # File writing configuration (optional debugging/backup feature)
+  file:
+    enabled: false  # Set to true to enable writing measurements to a CSV file
+    path: /srv/data.csv  # Path to the CSV file for measurement backup
