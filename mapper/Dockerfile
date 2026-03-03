@@ -1,12 +1,12 @@
 # Use Alpine-based JRE for minimal image size (~150MB vs ~400MB with JDK)
-FROM eclipse-temurin:11-jre-alpine
+FROM eclipse-temurin:11-jre
 
 # Add metadata
 LABEL maintainer="sparkworks"
 LABEL description="AC3 Data Management Mapper Service"
 
 # Create non-root user for security
-RUN addgroup -S spring && adduser -S spring -G spring
+RUN groupadd -r spring && useradd -r -g spring spring
 
 # Set working directory
 WORKDIR /app
